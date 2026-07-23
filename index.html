@@ -500,7 +500,7 @@ const CATS = {
   },
   calico: {
     name: "THE CALICO", emoji: "🧶", tag: "calico",
-    tagline: "Loves you deeply. On her schedule. From over there.",
+    tagline: "Loves deeply. On a strict personal schedule. From over there.",
     desc: "Independent boss energy. Subject runs the household, everyone knows it, and affection is distributed strictly on subject's terms. Rare, iconic, and fully aware of both facts.",
     traits: ["BOSS QUEEN", "INDEPENDENT", "ICONIC", "SELECTIVE CUDDLER"]
   },
@@ -560,32 +560,32 @@ const CATS = {
   },
   grump: {
     name: "THE GRUMP", emoji: "😾", tag: "angry",
-    tagline: "Hates everything. Loves you. Won't admit it.",
-    desc: "Subject's face is permanently set to 'disappointed'. Reviews everything: one star. And yet subject sleeps on your pillow every night and would fight a bear for you. Never mention this.",
+    tagline: "Hates everything. Loves exactly one person. Won't admit it.",
+    desc: "Subject's face is permanently set to 'disappointed'. Reviews everything: one star. And yet subject sleeps on the chosen human's pillow every night and would fight a bear for them. Never mention this.",
     traits: ["ONE-STAR REVIEWS", "SECRETLY SOFT", "PERMANENT FROWN", "RIDE OR DIE"]
   },
   bengal: {
     name: "THE BENGAL", emoji: "🐆", tag: "bengal",
     tagline: "An indoor wildcat with outdoor ambitions.",
-    desc: "The ceiling is a floor. The curtains are a ladder. Subject has the energy of three dogs and the agenda of a jewel thief. Nothing you own is safe, and subject looks gorgeous taking it.",
+    desc: "The ceiling is a floor. The curtains are a ladder. Subject has the energy of three dogs and the agenda of a jewel thief. No object in the household is safe, and subject looks gorgeous taking it.",
     traits: ["PARKOUR", "JEWEL THIEF", "TURBO MODE", "GORGEOUS MENACE"]
   },
   ragdoll: {
     name: "THE RAGDOLL", emoji: "🫠", tag: "ragdoll",
     tagline: "Structural integrity: optional.",
-    desc: "Pick subject up and subject simply stops being solid. Trust level: liquid. Subject assumes every stranger is a friend and has never once been wrong — because honestly, who could betray this.",
+    desc: "When lifted, subject simply stops being solid. Trust level: liquid. Subject assumes every stranger is a friend and has never once been wrong — because honestly, who could betray this.",
     traits: ["GOES LIMP", "LIQUID TRUST", "VELVET", "ZERO DEFENSES"]
   },
   persian: {
     name: "THE PERSIAN", emoji: "👑", tag: "persian",
     tagline: "Old money. New furniture. Zero effort.",
-    desc: "Subject was born into aristocracy and expects the staff (you) to keep up. Grooming: professional. Opinion of your décor: withheld, but visible in the face. Subject does not chase things. Things arrive.",
+    desc: "Subject was born into aristocracy and expects the staff to keep up. Grooming: professional. Opinion of the household décor: withheld, but visible in the face. Subject does not chase things. Things arrive.",
     traits: ["ARISTOCAT", "HIGH MAINTENANCE", "JUDGES DECOR", "VELVET THRONE"]
   },
   maine: {
     name: "THE MAINE COON", emoji: "🐻", tag: "maine",
     tagline: "A gentle giant running dog software.",
-    desc: "Subject is the size of a small dog, chirps like a bird, and follows you room to room like a shadow with tufted ears. Big paws, bigger heart. May accidentally destroy the Christmas tree. All love, industrial scale.",
+    desc: "Subject is the size of a small dog, chirps like a bird, and follows its favorite human room to room like a shadow with tufted ears. Big paws, bigger heart. May accidentally destroy the Christmas tree. All love, industrial scale.",
     traits: ["GENTLE GIANT", "CHIRPS", "DOG SOFTWARE", "TUFTED EARS"]
   },
   blep: {
@@ -648,10 +648,10 @@ const QUESTIONS = [
   {
     q: "Your love language is:",
     a: [
-      { t: "Physical touch, whether you consent or not", s: ["sphynx", "maine"], m: "EF" },
+      { t: "Physical touch, whether anyone consents or not", s: ["sphynx", "maine"], m: "EF" },
       { t: "One slow blink from across the room. That's the love", s: ["grey", "void"], m: "IN" },
-      { t: "Bringing you gifts (condition: unknown)", s: ["tabby", "bengal"], m: "SF" },
-      { t: "Graciously allowing you to admire me", s: ["white", "persian"], m: "IT" }
+      { t: "Bringing home gifts (condition: unknown)", s: ["tabby", "bengal"], m: "SF" },
+      { t: "Graciously allowing others to admire me", s: ["white", "persian"], m: "IT" }
     ]
   },
   {
@@ -1185,7 +1185,7 @@ async function buildBadge(cat) {
   ctx.font = "24px VT323, monospace";
   ctx.fillStyle = "#2b2118";
   const id = String(Math.floor(100000 + Math.random() * 900000));
-  ctx.fillText(`ID: C3P-${id} · REV C`, W / 2, 968);
+  ctx.fillText(`ID: C3P-${id}`, W / 2, 968);
 
   return new Promise(res => cv.toBlob(res, "image/png"));
 }
