@@ -861,12 +861,14 @@ function renderResult() {
     <div class="traits dim">${cat.traits.map(t => `<span>${t}</span>`).join("")}</div>
     <div class="btn-row">
       <button class="term-btn" id="share">⇪ TRANSMIT RESULT</button>
+      <button class="term-btn" id="badge">⎗ PRINT BADGE</button>
       <button class="term-btn" id="another">⟳ REFRESH FEED</button>
       <button class="term-btn" id="retake">◀ RESCAN</button>
     </div>`;
 
   loadPhoto(cat);
   document.getElementById("share").onclick = () => shareResult(cat);
+  document.getElementById("badge").onclick = () => downloadBadge(cat);
   document.getElementById("another").onclick = () => loadPhoto(cat);
   document.getElementById("retake").onclick = renderIntro;
 }
@@ -1056,6 +1058,130 @@ async function buildShareCard(cat) {
   ctx.fillRect(0, 0, W, H);
 
   return new Promise(res => cv.toBlob(res, "image/png"));
+}
+
+/* CR80 badge: 2.125in x 3.375in at 300dpi = 638 x 1013 px */
+async function buildBadge(cat) {
+  await document.fonts.ready;
+  const W = 638, H = 1013;
+  const cv = document.createElement("canvas");
+  cv.width = W; cv.height = H;
+  const ctx = cv.getContext("2d");
+
+  // beige chassis-metal base with brushed texture
+  ctx.fillStyle = "#cbc0a8";
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = "rgba(0,0,0,.025)";
+  for (let y = 0; y < H; y += 3) ctx.fillRect(0, y, W, 1);
+
+  // outer border
+  ctx.strokeStyle = "#2c2f32";
+  ctx.lineWidth = 8;
+  ctx.strokeRect(4, 4, W - 8, H - 8);
+
+  // lanyard slot
+  ctx.strokeStyle = "#9c9077";
+  ctx.lineWidth = 3;
+  if (ctx.roundRect) {
+    ctx.beginPath(); ctx.roundRect(W / 2 - 80, 26, 160, 26, 13); ctx.stroke();
+  } else ctx.strokeRect(W / 2 - 80, 26, 160, 26);
+
+  // header band
+  ctx.fillStyle = "#2c2f32";
+  ctx.fillRect(24, 72, W - 48, 130);
+  ctx.textAlign = "center";
+  ctx.font = "42px Michroma, sans-serif";
+  ctx.fillStyle = "#c3c9ce";
+  ctx.fillText("C-3PAW", W / 2, 132);
+  ctx.font = "15px Michroma, sans-serif";
+  ctx.fillStyle = "#7d838a";
+  ctx.fillText("FELINE PERSONNEL BADGE", W / 2, 172);
+
+  // hazard stripe
+  ctx.save();
+  ctx.beginPath(); ctx.rect(24, 202, W - 48, 14); ctx.clip();
+  ctx.fillStyle = "#d9a410"; ctx.fillRect(24, 202, W - 48, 14);
+  ctx.fillStyle = "#1c1e20";
+  for (let x = 0; x < W; x += 28) {
+    ctx.beginPath();
+    ctx.moveTo(x, 216); ctx.lineTo(x + 14, 202); ctx.lineTo(x + 28, 202); ctx.lineTo(x + 14, 216);
+    ctx.fill();
+  }
+  ctx.restore();
+
+  // specimen photo
+  const ps = 380, px = (W - ps) / 2, py = 252;
+  ctx.fillStyle = "#211d15";
+  ctx.fillRect(px, py, ps, ps);
+  const img = document.getElementById("cat-photo");
+  if (img && img.complete && img.naturalWidth > 0) {
+    const s = Math.min(img.naturalWidth, img.naturalHeight);
+    const sx = (img.naturalWidth - s) / 2, sy = (img.naturalHeight - s) / 2;
+    try { ctx.drawImage(img, sx, sy, s, s, px, py, ps, ps); } catch (e) {}
+  } else {
+    ctx.font = "200px serif";
+    ctx.fillText(cat.emoji, W / 2, py + ps / 2 + 70);
+  }
+  ctx.strokeStyle = "#2c2f32";
+  ctx.lineWidth = 5;
+  ctx.strokeRect(px, py, ps, ps);
+
+  // stamp across photo corner
+  ctx.save();
+  ctx.translate(px + ps - 70, py + ps - 26);
+  ctx.rotate(-.12);
+  ctx.strokeStyle = "#c0392b";
+  ctx.lineWidth = 4;
+  ctx.strokeRect(-140, -28, 280, 56);
+  ctx.font = "19px Michroma, sans-serif";
+  ctx.fillStyle = "#c0392b";
+  ctx.fillText("CONFIRMED FELINE", 0, 7);
+  ctx.restore();
+
+  // name (auto-shrink)
+  const nameText = `${displayName(cat)} ${cat.emoji}`;
+  let ns = 52;
+  ctx.font = `${ns}px VT323, monospace`;
+  while (ctx.measureText(nameText).width > W - 70 && ns > 30) {
+    ns -= 2; ctx.font = `${ns}px VT323, monospace`;
+  }
+  ctx.fillStyle = "#2b2118";
+  ctx.fillText(nameText, W / 2, 712);
+
+  ctx.font = "27px VT323, monospace";
+  ctx.fillStyle = "#8a4b00";
+  ctx.fillText(`PERSONALITY MATRIX: ${lastMbti || "????"}`, W / 2, 762);
+  ctx.font = "25px VT323, monospace";
+  ctx.fillStyle = "#6e6450";
+  ctx.fillText("CLEARANCE LEVEL: TREATS & SUNBEAMS", W / 2, 800);
+
+  // barcode
+  let bx = 120;
+  ctx.fillStyle = "#211d15";
+  while (bx < W - 120) {
+    const bw = 2 + Math.floor(Math.random() * 5);
+    if (Math.random() > .35) ctx.fillRect(bx, 848, bw, 84);
+    bx += bw + 3;
+  }
+  ctx.font = "24px VT323, monospace";
+  ctx.fillStyle = "#2b2118";
+  const id = String(Math.floor(100000 + Math.random() * 900000));
+  ctx.fillText(`ID: C3P-${id} · REV C`, W / 2, 968);
+
+  return new Promise(res => cv.toBlob(res, "image/png"));
+}
+
+async function downloadBadge(cat) {
+  showToast("PRINTING BADGE…");
+  try {
+    const blob = await buildBadge(cat);
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "c-3paw-badge.png";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+    showToast("BADGE DOWNLOADED. PRINT AT 2.125×3.375 IN. LAMINATE FOR FULL POWER.");
+  } catch (e) { showToast("BADGE PRINTER JAMMED. TRY AGAIN."); }
 }
 
 async function makeCardFile(cat) {
