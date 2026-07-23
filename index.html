@@ -309,8 +309,8 @@
 
   .tagline { font-size: 24px; margin-bottom: 10px; }
   .desc { font-size: 20px; line-height: 1.5; color: var(--amber-bright); margin-bottom: 14px; }
-  .traits { font-size: 18px; line-height: 1.8; }
-  .traits span { border: 1px solid var(--amber-dim); padding: 2px 8px; margin-right: 6px; white-space: nowrap; }
+  .traits { font-size: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .traits span { border: 1px solid var(--amber-dim); padding: 2px 8px; white-space: nowrap; }
 
   .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
   .btn-row .term-btn { width: auto; flex: 1; text-align: center; font-size: 19px; margin-top: 0; }
@@ -401,7 +401,18 @@
     .control-strip { gap: 12px; }
     .hazard { min-width: 30px; }
     .plate { font-size: 6.5px; }
-    .crt { padding: 22px 16px 26px; min-height: 420px; }
+    .crt {
+      padding: 22px 16px 26px;
+      min-height: 430px;
+      height: calc(100vh - 260px);
+      height: calc(100dvh - 260px);
+    }
+    .crt-inner {
+      height: 100%; overflow-y: auto;
+      scrollbar-width: thin; scrollbar-color: var(--amber-dim) transparent;
+    }
+    .crt-inner::-webkit-scrollbar { width: 4px; }
+    .crt-inner::-webkit-scrollbar-thumb { background: var(--amber-dim); border-radius: 2px; }
     .line, .term-btn { font-size: 19px; }
     .query { font-size: 22px; }
     .result-name { font-size: 27px; }
