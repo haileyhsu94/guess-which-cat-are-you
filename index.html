@@ -706,7 +706,7 @@ function renderResult() {
       <div class="feed-label dim"><span>LIVE SPECIMEN FEED · CH-0${Math.floor(Math.random() * 9) + 1}</span><span class="rec">● REC</span></div>
       <div class="feed-frame" id="frame">
         <div class="loading">ACQUIRING SIGNAL<span class="cursor"></span></div>
-        <img id="cat-photo" alt="A real ${cat.name.toLowerCase()}" style="opacity:0">
+        <img id="cat-photo" crossorigin="anonymous" alt="A real ${cat.name.toLowerCase()}" style="opacity:0">
       </div>
     </div>
     <div class="tagline green">"${cat.tagline}"</div>
@@ -730,7 +730,7 @@ function loadPhoto(cat) {
   let img = document.getElementById("cat-photo");
   frame.querySelector(".fallback")?.remove();
   if (!img) {
-    frame.insertAdjacentHTML("beforeend", `<img id="cat-photo" alt="A real ${cat.name.toLowerCase()}" style="opacity:0">`);
+    frame.insertAdjacentHTML("beforeend", `<img id="cat-photo" crossorigin="anonymous" alt="A real ${cat.name.toLowerCase()}" style="opacity:0">`);
     img = document.getElementById("cat-photo");
   }
   frame.querySelector(".loading")?.remove();
@@ -746,21 +746,197 @@ function loadPhoto(cat) {
   img.src = `https://cataas.com/cat/${cat.tag}?width=600&t=${Date.now()}`;
 }
 
+function shortShareText(cat) {
+  return `CAT-SCAN 3000 diagnosis: I am ${cat.name} ${cat.emoji} — "${cat.tagline}" Get scanned: ${QUIZ_URL}`;
+}
+
+function fullShareText(cat) {
+  return [
+    "CAT-SCAN 3000 // CLASSIFICATION COMPLETE",
+    `I am ${cat.name} ${cat.emoji}`,
+    `"${cat.tagline}"`,
+    "",
+    cat.desc,
+    "",
+    `CLASS TRAITS: ${cat.traits.join(" · ")}`,
+    `Get scanned: ${QUIZ_URL}`
+  ].join("\n");
+}
+
+function copyText(text) {
+  const legacy = () => {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) {}
+    ta.remove();
+    return ok;
+  };
+  const done = ok => showToast(ok ? "COPIED TO CLIPBOARD. GO BRAG." : "COPY FAILED. YOU ARE STILL A GREAT CAT.");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => done(true)).catch(() => done(legacy()));
+  } else {
+    done(legacy());
+  }
+}
+
+/* draw a 1080x1920 story-format result card on canvas */
+async function buildShareCard(cat) {
+  await document.fonts.ready;
+  const W = 1080, H = 1920;
+  const cv = document.createElement("canvas");
+  cv.width = W; cv.height = H;
+  const ctx = cv.getContext("2d");
+
+  const wrap = (text, x, y, maxW, lineH, font, color, glow) => {
+    ctx.font = font;
+    ctx.fillStyle = color;
+    ctx.shadowColor = glow || "transparent";
+    ctx.shadowBlur = glow ? 14 : 0;
+    ctx.textAlign = "center";
+    const words = text.split(" ");
+    let line = "";
+    for (const w of words) {
+      const probe = line ? line + " " + w : w;
+      if (ctx.measureText(probe).width > maxW && line) {
+        ctx.fillText(line, x, y); y += lineH; line = w;
+      } else line = probe;
+    }
+    if (line) { ctx.fillText(line, x, y); y += lineH; }
+    ctx.shadowBlur = 0;
+    return y;
+  };
+
+  // screen background + faint center glow
+  ctx.fillStyle = "#14100a";
+  ctx.fillRect(0, 0, W, H);
+  const glow = ctx.createRadialGradient(W / 2, H / 2, 100, W / 2, H / 2, 1100);
+  glow.addColorStop(0, "rgba(255,176,0,.07)");
+  glow.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, W, H);
+
+  // frame
+  ctx.strokeStyle = "#8f6510";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(46, 46, W - 92, H - 92);
+
+  // header
+  ctx.textAlign = "center";
+  ctx.font = "38px Michroma, sans-serif";
+  ctx.fillStyle = "#b9bfc4";
+  ctx.fillText("CAT-SCAN 3000", W / 2, 150);
+  ctx.font = "20px Michroma, sans-serif";
+  ctx.fillStyle = "#7d838a";
+  ctx.fillText("FELINE CLASSIFICATION UNIT", W / 2, 195);
+
+  ctx.font = "42px VT323, monospace";
+  ctx.fillStyle = "#8f6510";
+  ctx.fillText("CLASSIFICATION COMPLETE", W / 2, 300);
+
+  // cat name
+  ctx.font = "96px VT323, monospace";
+  ctx.fillStyle = "#ffb000";
+  ctx.shadowColor = "rgba(255,176,0,.8)";
+  ctx.shadowBlur = 26;
+  ctx.fillText(`${cat.name} ${cat.emoji}`, W / 2, 415);
+  ctx.shadowBlur = 0;
+
+  // specimen photo (reuse the CORS-clean displayed image so it's the same cat)
+  const px = 130, py = 480, ps = 820;
+  ctx.fillStyle = "#0c0903";
+  ctx.fillRect(px, py, ps, ps);
+  const img = document.getElementById("cat-photo");
+  if (img && img.complete && img.naturalWidth > 0) {
+    const s = Math.min(img.naturalWidth, img.naturalHeight);
+    const sx = (img.naturalWidth - s) / 2, sy = (img.naturalHeight - s) / 2;
+    try { ctx.drawImage(img, sx, sy, s, s, px, py, ps, ps); }
+    catch (e) { /* tainted fallback below */ }
+  } else {
+    ctx.font = "420px serif";
+    ctx.fillText(cat.emoji, W / 2, py + ps / 2 + 150);
+  }
+  ctx.strokeStyle = "#8f6510";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(px, py, ps, ps);
+  ctx.font = "30px VT323, monospace";
+  ctx.fillStyle = "#8f6510";
+  ctx.textAlign = "left";
+  ctx.fillText("LIVE SPECIMEN FEED", px + 8, py - 14);
+  ctx.textAlign = "center";
+
+  // stamp
+  ctx.save();
+  ctx.translate(870, 500);
+  ctx.rotate(-.1);
+  ctx.strokeStyle = "#ff5a3c";
+  ctx.lineWidth = 5;
+  ctx.strokeRect(-170, -38, 340, 76);
+  ctx.font = "26px Michroma, sans-serif";
+  ctx.fillStyle = "#ff5a3c";
+  ctx.shadowColor = "rgba(255,90,60,.7)";
+  ctx.shadowBlur = 16;
+  ctx.fillText("CONFIRMED FELINE", 0, 10);
+  ctx.restore();
+  ctx.shadowBlur = 0;
+
+  // tagline + analysis + traits
+  let y = wrap(`"${cat.tagline}"`, W / 2, 1395, 920, 58, "52px VT323, monospace", "#63e07c", "rgba(99,224,124,.6)");
+  y = wrap(cat.desc, W / 2, y + 28, 900, 50, "40px VT323, monospace", "#ffd35c");
+  wrap(cat.traits.map(t => `[${t}]`).join("  "), W / 2, y + 30, 900, 44, "34px VT323, monospace", "#8f6510");
+
+  // footer
+  ctx.font = "34px VT323, monospace";
+  ctx.fillStyle = "#63e07c";
+  ctx.fillText(QUIZ_URL.replace("https://", ""), W / 2, H - 90);
+
+  // scanlines + vignette
+  ctx.fillStyle = "rgba(0,0,0,.16)";
+  for (let ly = 0; ly < H; ly += 6) ctx.fillRect(0, ly, W, 2);
+  const vin = ctx.createRadialGradient(W / 2, H / 2, 500, W / 2, H / 2, 1250);
+  vin.addColorStop(0, "rgba(0,0,0,0)");
+  vin.addColorStop(1, "rgba(0,0,0,.42)");
+  ctx.fillStyle = vin;
+  ctx.fillRect(0, 0, W, H);
+
+  return new Promise(res => cv.toBlob(res, "image/png"));
+}
+
+async function shareCardImage(cat) {
+  showToast("RENDERING TRANSMISSION CARD…");
+  try {
+    const blob = await buildShareCard(cat);
+    if (!blob) throw new Error("no blob");
+    const file = new File([blob], "cat-scan-result.png", { type: "image/png" });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], text: shortShareText(cat) });
+    } else {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "cat-scan-result.png";
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+      showToast("CARD DOWNLOADED. POST IT ANYWHERE.");
+    }
+  } catch (e) {
+    if (e.name !== "AbortError") showToast("CARD TRANSMISSION FAILED.");
+  }
+}
+
 function shareResult(cat) {
   if (crt.querySelector(".sharemenu")) return;
-  const text = `CAT-SCAN 3000 diagnosis: I am ${cat.name} ${cat.emoji} — "${cat.tagline}"`;
-  const full = QUIZ_URL ? `${text} Get scanned: ${QUIZ_URL}` : text;
-  const enc = encodeURIComponent(full);
+  const encShort = encodeURIComponent(shortShareText(cat));
+  const encFull = encodeURIComponent(fullShareText(cat));
   const targets = [
-    navigator.share && { label: "⇪ SYSTEM SHARE SHEET", act: () => navigator.share(QUIZ_URL ? { text, url: QUIZ_URL } : { text }).catch(() => {}) },
-    { label: "𝕏 POST TO X", act: () => window.open(`https://twitter.com/intent/tweet?text=${enc}`, "_blank", "noopener") },
-    { label: "@ POST TO THREADS", act: () => window.open(`https://www.threads.net/intent/post?text=${enc}`, "_blank", "noopener") },
-    { label: "✆ SEND VIA WHATSAPP", act: () => window.open(`https://wa.me/?text=${enc}`, "_blank", "noopener") },
-    QUIZ_URL && { label: "f SHARE TO FACEBOOK", act: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(QUIZ_URL)}&quote=${encodeURIComponent(text)}`, "_blank", "noopener") },
-    { label: "⧉ COPY TRANSMISSION", act: () => navigator.clipboard.writeText(full)
-        .then(() => showToast("COPIED TO CLIPBOARD. GO BRAG."))
-        .catch(() => showToast("COPY FAILED. YOU ARE STILL A GREAT CAT.")) }
-  ].filter(Boolean);
+    { label: "▣ SHARE IMAGE CARD (IG & MORE)", act: () => shareCardImage(cat) },
+    { label: "𝕏 POST TO X", act: () => window.open(`https://twitter.com/intent/tweet?text=${encShort}`, "_blank", "noopener") },
+    { label: "@ POST TO THREADS", act: () => window.open(`https://www.threads.net/intent/post?text=${encShort}`, "_blank", "noopener") },
+    { label: "✆ SEND VIA WHATSAPP", act: () => window.open(`https://wa.me/?text=${encFull}`, "_blank", "noopener") },
+    { label: "⧉ COPY TRANSMISSION", act: () => copyText(fullShareText(cat)) }
+  ];
 
   const menu = document.createElement("div");
   menu.className = "sharemenu";
