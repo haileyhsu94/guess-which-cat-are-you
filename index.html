@@ -882,26 +882,6 @@ function fullShareText(cat) {
   ].join("\n");
 }
 
-function copyText(text) {
-  const legacy = () => {
-    const ta = document.createElement("textarea");
-    ta.value = text;
-    ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
-    document.body.appendChild(ta);
-    ta.focus(); ta.select();
-    let ok = false;
-    try { ok = document.execCommand("copy"); } catch (e) {}
-    ta.remove();
-    return ok;
-  };
-  const done = ok => showToast(ok ? "COPIED TO CLIPBOARD. GO BRAG." : "COPY FAILED. YOU ARE STILL A GREAT CAT.");
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(() => done(true)).catch(() => done(legacy()));
-  } else {
-    done(legacy());
-  }
-}
-
 /* draw a 1080x1920 card that mirrors the on-screen result layout */
 async function buildShareCard(cat) {
   await document.fonts.ready;
@@ -1096,14 +1076,19 @@ function shareResult(cat) {
   const encShort = encodeURIComponent(shortShareText(cat));
   const encFull = encodeURIComponent(fullShareText(cat));
   const targets = canShareFiles() ? [
-    { label: "⇪ SHARE CARD (IG · X · WHATSAPP · MORE)", act: () => shareCardImage(cat) },
-    { label: "⧉ COPY TEXT", act: () => copyText(fullShareText(cat)) }
+    { label: "⇪ SHARE CARD (INSTAGRAM · X · WHATSAPP …)", act: () => shareCardImage(cat) }
   ] : [
     { label: "⇩ DOWNLOAD IMAGE CARD", act: () => shareCardImage(cat) },
-    { label: "𝕏 POST TO X + CARD", act: () => openIntentWithCard(cat, `https://twitter.com/intent/tweet?text=${encShort}`) },
-    { label: "@ POST TO THREADS + CARD", act: () => openIntentWithCard(cat, `https://www.threads.net/intent/post?text=${encShort}`) },
-    { label: "✆ WHATSAPP + CARD", act: () => openIntentWithCard(cat, `https://wa.me/?text=${encFull}`) },
-    { label: "⧉ COPY TEXT", act: () => copyText(fullShareText(cat)) }
+    { label: "◨ INSTAGRAM", act: async () => {
+        window.open("https://www.instagram.com/", "_blank", "noopener");
+        try {
+          await downloadCard(cat);
+          showToast("CARD DOWNLOADED — CREATE A POST AND ATTACH IT.");
+        } catch (e) { showToast("CARD RENDER FAILED."); }
+      } },
+    { label: "𝕏 POST TO X", act: () => openIntentWithCard(cat, `https://twitter.com/intent/tweet?text=${encShort}`) },
+    { label: "@ POST TO THREADS", act: () => openIntentWithCard(cat, `https://www.threads.net/intent/post?text=${encShort}`) },
+    { label: "✆ WHATSAPP", act: () => openIntentWithCard(cat, `https://wa.me/?text=${encFull}`) }
   ];
 
   const menu = document.createElement("div");
