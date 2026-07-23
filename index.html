@@ -493,6 +493,66 @@ const CATS = {
     tagline: "Naked, warm, and completely shameless.",
     desc: "Weird and proud of it. Subject has never known embarrassment, personal space, or a cold shoulder — literally: subject demands blanket access. People stare; subject reads it as applause.",
     traits: ["GLORIOUSLY WEIRD", "HEAT-SEEKING", "SHAMELESS", "VELCRO BODY"]
+  },
+  kitten: {
+    name: "THE KITTEN", emoji: "🍼", tag: "kitten",
+    tagline: "Zero object permanence. Unlimited violence.",
+    desc: "Everything is new, everything is a toy, and everything must be attacked at 5am. Subject runs on pure wonder and three minutes of sleep. Tomorrow, subject will remember none of this.",
+    traits: ["FERAL JOY", "NO MEMORY", "POCKET-SIZED", "5AM ATTACKS"]
+  },
+  chonk: {
+    name: "THE CHONK", emoji: "🍔", tag: "fat",
+    tagline: "An absolute unit. Gravity's favorite cat.",
+    desc: "Subject has never missed a meal and never intends to. Movement is a considered decision, made rarely and with dignity. Subject is not fat — subject is simply more cat than most.",
+    traits: ["ABSOLUTE UNIT", "FOOD-MOTIVATED", "GRAVITY-ASSISTED", "DIGNIFIED"]
+  },
+  floof: {
+    name: "THE FLOOF", emoji: "🦁", tag: "fluffy",
+    tagline: "90% hair. 10% cat. 100% majestic.",
+    desc: "Subject sheds a full second cat every week. Beneath the magnificent cloud lies a tiny skeleton and delusions of lionhood. Brushing is a negotiation. The lint roller industry depends on subject.",
+    traits: ["MAJESTIC", "SELF-SHEDDING", "CLOUD-SHAPED", "LION SOFTWARE"]
+  },
+  sleeper: {
+    name: "THE SLEEPER", emoji: "😴", tag: "sleeping",
+    tagline: "Awake for the 2019 tuna incident. Asleep since.",
+    desc: "Subject sleeps 22 hours a day and needs a nap to recover from waking up. Career: professional loaf, horizontal division. Do not disturb — subject will file a formal complaint.",
+    traits: ["22H/DAY", "HORIZONTAL", "DO NOT DISTURB", "DREAM CHASER"]
+  },
+  grump: {
+    name: "THE GRUMP", emoji: "😾", tag: "angry",
+    tagline: "Hates everything. Loves you. Won't admit it.",
+    desc: "Subject's face is permanently set to 'disappointed'. Reviews everything: one star. And yet subject sleeps on your pillow every night and would fight a bear for you. Never mention this.",
+    traits: ["ONE-STAR REVIEWS", "SECRETLY SOFT", "PERMANENT FROWN", "RIDE OR DIE"]
+  },
+  bengal: {
+    name: "THE BENGAL", emoji: "🐆", tag: "bengal",
+    tagline: "An indoor wildcat with outdoor ambitions.",
+    desc: "The ceiling is a floor. The curtains are a ladder. Subject has the energy of three dogs and the agenda of a jewel thief. Nothing you own is safe, and subject looks gorgeous taking it.",
+    traits: ["PARKOUR", "JEWEL THIEF", "TURBO MODE", "GORGEOUS MENACE"]
+  },
+  ragdoll: {
+    name: "THE RAGDOLL", emoji: "🫠", tag: "ragdoll",
+    tagline: "Structural integrity: optional.",
+    desc: "Pick subject up and subject simply stops being solid. Trust level: liquid. Subject assumes every stranger is a friend and has never once been wrong — because honestly, who could betray this.",
+    traits: ["GOES LIMP", "LIQUID TRUST", "VELVET", "ZERO DEFENSES"]
+  },
+  persian: {
+    name: "THE PERSIAN", emoji: "👑", tag: "persian",
+    tagline: "Old money. New furniture. Zero effort.",
+    desc: "Subject was born into aristocracy and expects the staff (you) to keep up. Grooming: professional. Opinion of your décor: withheld, but visible in the face. Subject does not chase things. Things arrive.",
+    traits: ["ARISTOCAT", "HIGH MAINTENANCE", "JUDGES DECOR", "VELVET THRONE"]
+  },
+  maine: {
+    name: "THE MAINE COON", emoji: "🐻", tag: "maine",
+    tagline: "A gentle giant running dog software.",
+    desc: "Subject is the size of a small dog, chirps like a bird, and follows you room to room like a shadow with tufted ears. Big paws, bigger heart. May accidentally destroy the Christmas tree. All love, industrial scale.",
+    traits: ["GENTLE GIANT", "CHIRPS", "DOG SOFTWARE", "TUFTED EARS"]
+  },
+  blep: {
+    name: "THE BLEP", emoji: "👅", tag: "blep",
+    tagline: "Tongue out. Thoughts elsewhere.",
+    desc: "Subject's tongue is out because subject forgot to put it back. That's it. That's the whole system. Somewhere mid-thought the thought simply left, and what remains is pure, perfect content.",
+    traits: ["PERMANENT BLEP", "HEAD EMPTY", "ACCIDENTAL ICON", "SOFT LAUNCH"]
   }
 };
 
@@ -500,73 +560,91 @@ const QUESTIONS = [
   {
     q: "It's 3am. Everyone is asleep. What do you do?",
     a: [
-      { t: "Scream at absolutely nothing", s: ["void", "tortie"] },
-      { t: "Sprint laps around the house at Mach 5", s: ["orange", "sphynx"] },
-      { t: "Sleep. Obviously. What is wrong with you", s: ["grey", "tabby"] },
-      { t: "Sit on someone's face until they wake up and appreciate me", s: ["siamese", "tuxedo"] }
+      { t: "Scream at absolutely nothing", s: ["void", "siamese"] },
+      { t: "Sprint laps around the house at Mach 5", s: ["orange", "bengal"] },
+      { t: "Sleep. Obviously. What is wrong with you", s: ["grey", "sleeper"] },
+      { t: "Attack the nearest sleeping human's feet", s: ["kitten", "tortie"] }
     ]
   },
   {
     q: "A new person arrives at the house. You:",
     a: [
-      { t: "Greet them at the door and immediately demand attention", s: ["orange", "siamese"] },
-      { t: "Vanish. They will never know I exist", s: ["void", "white"] },
-      { t: "Observe from a high place, silently judging", s: ["calico", "grey"] },
-      { t: "Perform tricks until they clap", s: ["tuxedo", "sphynx"] }
+      { t: "Greet them at the door and immediately demand attention", s: ["maine", "orange"] },
+      { t: "Vanish. They will never know I exist", s: ["void", "persian"] },
+      { t: "Observe from a high place, silently judging", s: ["calico", "grump"] },
+      { t: "Flop over and go completely limp. Instant friend", s: ["ragdoll", "blep"] }
     ]
   },
   {
     q: "Dinner is 7 minutes late. Your reaction:",
     a: [
       { t: "A full opera performance of despair", s: ["siamese", "tortie"] },
-      { t: "Knock something off the counter as a warning", s: ["tortie", "calico"] },
-      { t: "Sit by the bowl, silently disappointed in everyone", s: ["tabby", "grey"] },
-      { t: "Attempt to eat a houseplant, a shoe, and the air", s: ["orange", "sphynx"] }
+      { t: "Knock something off the counter as a warning", s: ["grump", "calico"] },
+      { t: "Sit by the bowl, silently disappointed in everyone", s: ["tabby", "sleeper"] },
+      { t: "I have already eaten. Twice. Elsewhere", s: ["chonk", "tuxedo"] }
     ]
   },
   {
     q: "Pick a hobby:",
     a: [
-      { t: "Sitting in boxes two sizes too small", s: ["tabby", "orange"] },
-      { t: "Fashion. I am the moment", s: ["white", "tuxedo"] },
-      { t: "Long-distance staring contests with the wall", s: ["void", "grey"] },
-      { t: "Yelling", s: ["siamese", "tortie"] }
+      { t: "Sitting in boxes two sizes too small", s: ["tabby", "chonk"] },
+      { t: "Fashion. I am the moment", s: ["white", "persian"] },
+      { t: "Long-distance staring contests with the wall", s: ["void", "blep"] },
+      { t: "Climbing things that were never meant to be climbed", s: ["bengal", "kitten"] }
     ]
   },
   {
     q: "Your love language is:",
     a: [
-      { t: "Physical touch, whether you consent or not", s: ["sphynx", "orange"] },
-      { t: "One slow blink from across the room. That's the love", s: ["void", "grey"] },
-      { t: "Bringing you gifts (condition: unknown)", s: ["tabby", "tuxedo"] },
-      { t: "Graciously allowing you to admire me", s: ["white", "calico"] }
+      { t: "Physical touch, whether you consent or not", s: ["sphynx", "maine"] },
+      { t: "One slow blink from across the room. That's the love", s: ["grey", "void"] },
+      { t: "Bringing you gifts (condition: unknown)", s: ["tabby", "bengal"] },
+      { t: "Graciously allowing you to admire me", s: ["white", "persian"] }
     ]
   },
   {
     q: "How do you handle conflict?",
     a: [
-      { t: "The paw of correction. Claws optional", s: ["tortie", "calico"] },
+      { t: "The paw of correction. Claws optional", s: ["tortie", "grump"] },
       { t: "Dramatic exit, followed by six hours of sulking", s: ["white", "siamese"] },
-      { t: "Conflict? I was never here. I am vibes only", s: ["orange", "tabby"] },
-      { t: "Psychological warfare via unbroken eye contact", s: ["void", "sphynx"] }
+      { t: "Conflict? I was never here. I am vibes only", s: ["orange", "blep"] },
+      { t: "Go completely limp until the problem loses interest", s: ["ragdoll", "sleeper"] }
     ]
   },
   {
     q: "Describe your ideal Saturday:",
     a: [
-      { t: "A sunbeam. Fourteen hours. No interruptions", s: ["grey", "white"] },
-      { t: "Committing crimes at maximum speed", s: ["orange", "tortie"] },
+      { t: "A sunbeam. Fourteen hours. No interruptions", s: ["grey", "sleeper"] },
+      { t: "Committing crimes at maximum speed", s: ["orange", "kitten"] },
       { t: "Hosting a one-cat TED talk for the household", s: ["siamese", "sphynx"] },
-      { t: "Supervising everyone from the tallest point in the room", s: ["calico", "void", "tuxedo"] }
+      { t: "Supervising everyone from the tallest point in the room", s: ["calico", "tuxedo"] }
     ]
   },
   {
-    q: "Finally — choose your flaw. Be honest:",
+    q: "Choose your flaw. Be honest:",
     a: [
-      { t: "\"Flaw\"? Unfamiliar concept. Next question", s: ["white", "calico"] },
-      { t: "Too smart, and I use it for evil", s: ["siamese", "void"] },
-      { t: "No thoughts whatsoever, head empty", s: ["orange", "tuxedo"] },
-      { t: "Clingy to a degree that raises legal questions", s: ["sphynx", "tabby"] }
+      { t: "\"Flaw\"? Unfamiliar concept. Next question", s: ["white", "persian"] },
+      { t: "Too smart, and I use it for evil", s: ["siamese", "bengal"] },
+      { t: "No thoughts whatsoever, head empty", s: ["orange", "blep"] },
+      { t: "Clingy to a degree that raises legal questions", s: ["sphynx", "ragdoll"] }
+    ]
+  },
+  {
+    q: "Someone picks you up without asking. You:",
+    a: [
+      { t: "Go limp. This is my life now", s: ["ragdoll", "chonk"] },
+      { t: "Immediate paw of correction, claws included", s: ["tortie", "grump"] },
+      { t: "Freeze with maximum offense. The audacity", s: ["calico", "white"] },
+      { t: "Wiggle free, then act like nothing happened", s: ["tuxedo", "floof"] }
+    ]
+  },
+  {
+    q: "Finally — your relationship with hair maintenance:",
+    a: [
+      { t: "Constant. I am 90% hair and it must be perfect", s: ["floof", "persian"] },
+      { t: "I am naked and unbothered", s: ["sphynx", "grey"] },
+      { t: "I shed a full second cat weekly. You're welcome", s: ["floof", "maine"] },
+      { t: "Groomed once, in 2019. Still coasting", s: ["tuxedo", "chonk"] }
     ]
   }
 ];
@@ -627,7 +705,7 @@ async function renderIntro() {
     { text: "SPECIMEN DETECTED: HUMAN (UNVERIFIED)", cls: "green" },
     { text: "HYPOTHESIS: SPECIMEN MAY SECRETLY BE A CAT.", cls: "glow" },
     { text: " " },
-    { text: "PROTOCOL: 8 QUERIES. 10 KNOWN FELINE CLASSES.", cls: "glow" },
+    { text: "PROTOCOL: 10 QUERIES. 20 KNOWN FELINE CLASSES.", cls: "glow" },
     { text: "ACCURACY: 100% FOLKLORE. 0% SCIENCE.", cls: "dim" },
     { text: "READY.", cls: "green cursor", pause: 60 }
   ]);
@@ -654,7 +732,7 @@ function renderQuestion() {
   const keys = ["A", "B", "C", "D"];
   screen.innerHTML = `
     <div class="readout">
-      <span class="dim">QUERY ${String(current + 1).padStart(2, "0")}/0${QUESTIONS.length}</span>
+      <span class="dim">QUERY ${String(current + 1).padStart(2, "0")}/${String(QUESTIONS.length).padStart(2, "0")}</span>
       <span class="blocks">${blocks()}</span>
     </div>
     <hr class="divider">
@@ -785,20 +863,20 @@ function copyText(text) {
   }
 }
 
-/* draw a 1080x1920 story-format result card on canvas */
+/* draw a 1080x1920 card that mirrors the on-screen result layout */
 async function buildShareCard(cat) {
   await document.fonts.ready;
-  const W = 1080, H = 1920;
+  const W = 1080, H = 1920, P = 76;
   const cv = document.createElement("canvas");
   cv.width = W; cv.height = H;
   const ctx = cv.getContext("2d");
 
-  const wrap = (text, x, y, maxW, lineH, font, color, glow) => {
+  const wrapLeft = (text, x, y, maxW, lineH, font, color, glow) => {
     ctx.font = font;
     ctx.fillStyle = color;
     ctx.shadowColor = glow || "transparent";
     ctx.shadowBlur = glow ? 14 : 0;
-    ctx.textAlign = "center";
+    ctx.textAlign = "left";
     const words = text.split(" ");
     let line = "";
     for (const w of words) {
@@ -812,91 +890,118 @@ async function buildShareCard(cat) {
     return y;
   };
 
-  // screen background + faint center glow
-  ctx.fillStyle = "#14100a";
+  // CRT background + faint center glow
+  ctx.fillStyle = "#161003";
   ctx.fillRect(0, 0, W, H);
-  const glow = ctx.createRadialGradient(W / 2, H / 2, 100, W / 2, H / 2, 1100);
-  glow.addColorStop(0, "rgba(255,176,0,.07)");
-  glow.addColorStop(1, "rgba(0,0,0,0)");
-  ctx.fillStyle = glow;
+  const glo = ctx.createRadialGradient(W / 2, H / 2, 100, W / 2, H / 2, 1100);
+  glo.addColorStop(0, "rgba(255,176,0,.06)");
+  glo.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.fillStyle = glo;
   ctx.fillRect(0, 0, W, H);
 
-  // frame
-  ctx.strokeStyle = "#8f6510";
-  ctx.lineWidth = 3;
-  ctx.strokeRect(46, 46, W - 92, H - 92);
-
-  // header
-  ctx.textAlign = "center";
-  ctx.font = "38px Michroma, sans-serif";
-  ctx.fillStyle = "#b9bfc4";
-  ctx.fillText("CAT-SCAN 3000", W / 2, 150);
-  ctx.font = "20px Michroma, sans-serif";
-  ctx.fillStyle = "#7d838a";
-  ctx.fillText("FELINE CLASSIFICATION UNIT", W / 2, 195);
-
+  // top row: status + stamp (like the result screen)
+  ctx.textAlign = "left";
   ctx.font = "42px VT323, monospace";
   ctx.fillStyle = "#8f6510";
-  ctx.fillText("CLASSIFICATION COMPLETE", W / 2, 300);
+  ctx.fillText("CLASSIFICATION COMPLETE", P, 165);
 
-  // cat name
-  ctx.font = "96px VT323, monospace";
-  ctx.fillStyle = "#ffb000";
-  ctx.shadowColor = "rgba(255,176,0,.8)";
-  ctx.shadowBlur = 26;
-  ctx.fillText(`${cat.name} ${cat.emoji}`, W / 2, 415);
-  ctx.shadowBlur = 0;
-
-  // specimen photo (reuse the CORS-clean displayed image so it's the same cat)
-  const px = 130, py = 480, ps = 820;
-  ctx.fillStyle = "#0c0903";
-  ctx.fillRect(px, py, ps, ps);
-  const img = document.getElementById("cat-photo");
-  if (img && img.complete && img.naturalWidth > 0) {
-    const s = Math.min(img.naturalWidth, img.naturalHeight);
-    const sx = (img.naturalWidth - s) / 2, sy = (img.naturalHeight - s) / 2;
-    try { ctx.drawImage(img, sx, sy, s, s, px, py, ps, ps); }
-    catch (e) { /* tainted fallback below */ }
-  } else {
-    ctx.font = "420px serif";
-    ctx.fillText(cat.emoji, W / 2, py + ps / 2 + 150);
-  }
-  ctx.strokeStyle = "#8f6510";
-  ctx.lineWidth = 3;
-  ctx.strokeRect(px, py, ps, ps);
-  ctx.font = "30px VT323, monospace";
-  ctx.fillStyle = "#8f6510";
-  ctx.textAlign = "left";
-  ctx.fillText("LIVE SPECIMEN FEED", px + 8, py - 14);
-  ctx.textAlign = "center";
-
-  // stamp
   ctx.save();
-  ctx.translate(870, 500);
-  ctx.rotate(-.1);
+  ctx.translate(W - P - 175, 150);
+  ctx.rotate(-.07);
   ctx.strokeStyle = "#ff5a3c";
   ctx.lineWidth = 5;
-  ctx.strokeRect(-170, -38, 340, 76);
-  ctx.font = "26px Michroma, sans-serif";
+  ctx.strokeRect(-175, -36, 350, 72);
+  ctx.font = "25px Michroma, sans-serif";
   ctx.fillStyle = "#ff5a3c";
+  ctx.textAlign = "center";
   ctx.shadowColor = "rgba(255,90,60,.7)";
   ctx.shadowBlur = 16;
-  ctx.fillText("CONFIRMED FELINE", 0, 10);
+  ctx.fillText("CONFIRMED FELINE", 0, 9);
   ctx.restore();
   ctx.shadowBlur = 0;
 
-  // tagline + analysis + traits
-  let y = wrap(`"${cat.tagline}"`, W / 2, 1395, 920, 58, "52px VT323, monospace", "#63e07c", "rgba(99,224,124,.6)");
-  y = wrap(cat.desc, W / 2, y + 28, 900, 50, "40px VT323, monospace", "#ffd35c");
-  wrap(cat.traits.map(t => `[${t}]`).join("  "), W / 2, y + 30, 900, 44, "34px VT323, monospace", "#8f6510");
+  // cat name, left-aligned with glow
+  ctx.textAlign = "left";
+  ctx.font = "92px VT323, monospace";
+  ctx.fillStyle = "#ffb000";
+  ctx.shadowColor = "rgba(255,176,0,.8)";
+  ctx.shadowBlur = 26;
+  ctx.fillText(`${cat.name} ${cat.emoji}`, P, 300);
+  ctx.shadowBlur = 0;
 
-  // footer
-  ctx.font = "34px VT323, monospace";
+  // specimen feed frame (4:3 like the screen)
+  const fx = P, fy = 360, fw = W - P * 2;
+  const labelH = 58, pad = 14;
+  const pw = fw - pad * 2, ph = Math.round(pw * 3 / 4);
+  const fh = labelH + ph + pad;
+
+  ctx.strokeStyle = "#8f6510";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(fx, fy, fw, fh);
+
+  ctx.font = "30px VT323, monospace";
+  ctx.fillStyle = "#8f6510";
+  const ch = Math.floor(Math.random() * 9) + 1;
+  ctx.fillText(`LIVE SPECIMEN FEED · CH-0${ch}`, fx + pad + 4, fy + 40);
+  ctx.textAlign = "right";
+  ctx.fillStyle = "#ff5a3c";
+  ctx.fillText("● REC", fx + fw - pad - 4, fy + 40);
+  ctx.textAlign = "left";
+
+  const px = fx + pad, py = fy + labelH;
+  ctx.fillStyle = "#000";
+  ctx.fillRect(px, py, pw, ph);
+  const img = document.getElementById("cat-photo");
+  if (img && img.complete && img.naturalWidth > 0) {
+    // cover-crop the displayed (CORS-clean) photo to 4:3
+    const ir = img.naturalWidth / img.naturalHeight, fr = pw / ph;
+    let sw = img.naturalWidth, sh = img.naturalHeight, sx = 0, sy = 0;
+    if (ir > fr) { sw = img.naturalHeight * fr; sx = (img.naturalWidth - sw) / 2; }
+    else { sh = img.naturalWidth / fr; sy = (img.naturalHeight - sh) / 2; }
+    try {
+      ctx.filter = "contrast(1.08) saturate(.85) sepia(.15)";
+      ctx.drawImage(img, sx, sy, sw, sh, px, py, pw, ph);
+      ctx.filter = "none";
+    } catch (e) { ctx.filter = "none"; }
+  } else {
+    ctx.font = "300px serif";
+    ctx.textAlign = "center";
+    ctx.fillText(cat.emoji, px + pw / 2, py + ph / 2 + 110);
+    ctx.textAlign = "left";
+  }
+  // CCTV scanlines over the photo only
+  ctx.fillStyle = "rgba(0,0,0,.22)";
+  for (let ly = py; ly < py + ph; ly += 5) ctx.fillRect(px, ly, pw, 2);
+
+  // tagline (green, quoted) + analysis
+  let y = fy + fh + 90;
+  y = wrapLeft(`"${cat.tagline}"`, P, y, fw, 60, "52px VT323, monospace", "#63e07c", "rgba(99,224,124,.6)");
+  y = wrapLeft(cat.desc, P, y + 26, fw, 54, "42px VT323, monospace", "#ffd35c");
+
+  // trait chips: bordered boxes like the screen
+  ctx.font = "30px VT323, monospace";
+  let cx = P, cy = y + 34;
+  const chipH = 52, chipPad = 16, gap = 14;
+  for (const t of cat.traits) {
+    const tw = ctx.measureText(t).width + chipPad * 2;
+    if (cx + tw > W - P) { cx = P; cy += chipH + gap; }
+    ctx.strokeStyle = "#8f6510";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(cx, cy, tw, chipH);
+    ctx.fillStyle = "#8f6510";
+    ctx.fillText(t, cx + chipPad, cy + 36);
+    cx += tw + gap;
+  }
+
+  // footer URL
+  ctx.textAlign = "center";
+  ctx.font = "36px VT323, monospace";
   ctx.fillStyle = "#63e07c";
-  ctx.fillText(QUIZ_URL.replace("https://", ""), W / 2, H - 90);
+  ctx.fillText(QUIZ_URL.replace("https://", ""), W / 2, H - 84);
+  ctx.textAlign = "left";
 
-  // scanlines + vignette
-  ctx.fillStyle = "rgba(0,0,0,.16)";
+  // full-card scanlines + vignette (the CRT look)
+  ctx.fillStyle = "rgba(0,0,0,.14)";
   for (let ly = 0; ly < H; ly += 6) ctx.fillRect(0, ly, W, 2);
   const vin = ctx.createRadialGradient(W / 2, H / 2, 500, W / 2, H / 2, 1250);
   vin.addColorStop(0, "rgba(0,0,0,0)");
