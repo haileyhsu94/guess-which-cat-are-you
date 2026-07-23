@@ -113,7 +113,8 @@
       inset 0 0 60px rgba(0,0,0,.85),
       inset 0 0 14px rgba(255,176,0,.12);
     padding: 30px 28px 34px;
-    min-height: 480px;
+    height: min(620px, calc(100vh - 300px));
+    min-height: 460px;
     overflow: hidden;
   }
   /* scanlines + vignette */
@@ -129,7 +130,14 @@
     background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.5) 100%);
     border-radius: inherit;
   }
-  .crt-inner { position: relative; z-index: 2; animation: flicker 4s steps(1) infinite; }
+  .crt-inner {
+    position: relative; z-index: 2;
+    height: 100%; overflow-y: auto;
+    scrollbar-width: thin; scrollbar-color: var(--amber-dim) transparent;
+    animation: flicker 4s steps(1) infinite;
+  }
+  .crt-inner::-webkit-scrollbar { width: 4px; }
+  .crt-inner::-webkit-scrollbar-thumb { background: var(--amber-dim); border-radius: 2px; }
   @keyframes flicker { 0%,93%,100% { opacity: 1; } 94% { opacity: .93; } 95% { opacity: 1; } 97% { opacity: .96; } }
 
   /* chaos knob tiers */
@@ -276,7 +284,8 @@
   .term-btn .key { color: var(--green); margin-right: 10px; }
   .term-btn:focus-visible .key, .term-btn:active .key { color: var(--screen); text-shadow: none; }
 
-  .cta { text-align: center; margin-top: 26px; }
+  .cta { text-align: center; position: absolute; left: 0; right: 0; bottom: 6px; }
+  #boot { padding-bottom: 90px; }
   .cta .term-btn { display: inline-block; width: auto; text-align: center; font-size: 24px; padding: 12px 34px; border-width: 2px; }
 
   /* ================= quiz header ================= */
@@ -629,7 +638,7 @@ const DEPTS = {
 };
 for (const k in DEPTS) CATS[k].dept = DEPTS[k];
 
-/* ================= i18n (EN + 繁體中文) ================= */
+/* ================= i18n: EN + 繁體中文 ================= */
 const storedLang = localStorage.getItem("c3paw-lang");
 const lang = storedLang || ((navigator.language || "").toLowerCase().startsWith("zh") ? "zh" : "en");
 const isZh = lang === "zh";
@@ -639,34 +648,30 @@ const T = {
   langBtn: "中文",
   begin: "▶ BEGIN SCAN",
   boot: [
-    { text: "C-3PAW // FELINE PROTOCOL DROID v3.0", cls: "glow" },
-    { text: "MEOW TRANSLATOR............ 6 MILLION FORMS. FLUENT", cls: "dim" },
-    { text: "LASER POINTER MODULE....... OK", cls: "dim" },
-    { text: "HYPERDRIVE................. MISSING (A CAT KNOCKED IT OFF)", cls: "dim" },
-    { text: "TREAT DISPENSER............ EMPTY (AS ALWAYS)", cls: "dim" },
+    { text: "C-3PAW // FELINE PROTOCOL DROID v3.0", cls: "glow", pause: 60 },
+    { text: "HYPERDRIVE................. MISSING (A CAT KNOCKED IT OFF)", cls: "dim", pause: 60 },
+    { text: "TREAT DISPENSER............ EMPTY (AS ALWAYS)", cls: "dim", pause: 60 },
     { text: " " },
-    { text: "SPECIMEN DETECTED: HUMAN (UNVERIFIED)", cls: "green" },
-    { text: "HYPOTHESIS: SPECIMEN MAY SECRETLY BE A CAT.", cls: "glow" },
-    { text: " " },
-    { text: "PROTOCOL: 10 QUERIES. 20 KNOWN FELINE CLASSES.", cls: "dim" },
-    { text: "ACCURACY: 100% FOLKLORE. 0% SCIENCE.", cls: "dim" },
+    { text: "SPECIMEN DETECTED: HUMAN (UNVERIFIED)", cls: "green", pause: 60 },
+    { text: "HYPOTHESIS: SPECIMEN MAY SECRETLY BE A CAT.", cls: "glow", pause: 60 },
+    { text: "ACCURACY: 100% FOLKLORE. 0% SCIENCE.", cls: "dim", pause: 60 },
     { text: "READY.", cls: "green cursor", pause: 60 }
   ],
   analyzing: [
     { text: "ALL 10 QUERIES RECEIVED. ANALYZING…", cls: "glow" },
-    { text: "QUERY 01: 3AM BEHAVIOR............ CONCERNING", cls: "dim", pause: 140 },
-    { text: "QUERY 02: STRANGER RESPONSE....... JUDGED", cls: "dim", pause: 140 },
-    { text: "QUERY 03: DINNER PATIENCE......... 0.7 SECONDS", cls: "dim", pause: 140 },
-    { text: "QUERY 04: HOBBY PORTFOLIO......... UNEMPLOYABLE", cls: "dim", pause: 140 },
-    { text: "QUERY 05: LOVE LANGUAGE........... RECEIVED(?)", cls: "dim", pause: 140 },
-    { text: "QUERY 06: CONFLICT STYLE.......... LAWYER ADVISED", cls: "dim", pause: 140 },
-    { text: "QUERY 07: SATURDAY SIMULATION..... APPROVED", cls: "dim", pause: 140 },
-    { text: "QUERY 08: FLAW CATALOGUE.......... STORAGE FULL", cls: "dim", pause: 140 },
-    { text: "QUERY 09: PICK-UP TOLERANCE....... INCIDENT LOGGED", cls: "dim", pause: 140 },
-    { text: "QUERY 10: GROOMING RECORDS........ SEALED BY COURT", cls: "dim", pause: 200 },
-    { text: "MIDI-CHLORIAN COUNT............... 4 (ALL NAPPING)", cls: "dim", pause: 240 },
-    { text: "CONSULTING JUNG DATABASE.......... RELUCTANT MATCH", cls: "dim", pause: 260 },
-    { text: "CLASSIFICATION LOCKED.", cls: "green", pause: 350 }
+    { text: "QUERY 01: 3AM BEHAVIOR............ CONCERNING", cls: "dim", pause: 45 },
+    { text: "QUERY 02: STRANGER RESPONSE....... JUDGED", cls: "dim", pause: 45 },
+    { text: "QUERY 03: DINNER PATIENCE......... 0.7 SECONDS", cls: "dim", pause: 45 },
+    { text: "QUERY 04: HOBBY PORTFOLIO......... UNEMPLOYABLE", cls: "dim", pause: 45 },
+    { text: "QUERY 05: LOVE LANGUAGE........... RECEIVED(?)", cls: "dim", pause: 45 },
+    { text: "QUERY 06: CONFLICT STYLE.......... LAWYER ADVISED", cls: "dim", pause: 45 },
+    { text: "QUERY 07: SATURDAY SIMULATION..... APPROVED", cls: "dim", pause: 45 },
+    { text: "QUERY 08: FLAW CATALOGUE.......... STORAGE FULL", cls: "dim", pause: 45 },
+    { text: "QUERY 09: PICK-UP TOLERANCE....... INCIDENT LOGGED", cls: "dim", pause: 45 },
+    { text: "QUERY 10: GROOMING RECORDS........ SEALED BY COURT", cls: "dim", pause: 60 },
+    { text: "MIDI-CHLORIAN COUNT............... 4 (ALL NAPPING)", cls: "dim", pause: 70 },
+    { text: "CONSULTING JUNG DATABASE.......... RELUCTANT MATCH", cls: "dim", pause: 80 },
+    { text: "CLASSIFICATION LOCKED.", cls: "green", pause: 250 }
   ],
   query: "QUERY",
   classDone: "CLASSIFICATION COMPLETE",
@@ -776,34 +781,30 @@ if (isZh) {
     langBtn: "EN",
     begin: "▶ 開始掃描",
     boot: [
-      { text: "C-3PAW // 貓科禮儀機器人 v3.0", cls: "glow" },
-      { text: "喵語翻譯機............ 六百萬種形式。流利", cls: "dim" },
-      { text: "雷射筆模組............ 正常", cls: "dim" },
-      { text: "超空間引擎............ 遺失（被貓撥下去了）", cls: "dim" },
-      { text: "零食供應器............ 空的（一如既往）", cls: "dim" },
+      { text: "C-3PAW // 貓科禮儀機器人 v3.0", cls: "glow", pause: 60 },
+      { text: "超空間引擎............ 遺失（被貓撥下去了）", cls: "dim", pause: 60 },
+      { text: "零食供應器............ 空的（一如既往）", cls: "dim", pause: 60 },
       { text: " " },
-      { text: "偵測到樣本：人類（未驗證）", cls: "green" },
-      { text: "假設：樣本可能其實是一隻貓。", cls: "glow" },
-      { text: " " },
-      { text: "協議：10 道問題。20 種已知貓型。", cls: "dim" },
-      { text: "準確度：100% 民間傳說。0% 科學。", cls: "dim" },
+      { text: "偵測到樣本：人類（未驗證）", cls: "green", pause: 60 },
+      { text: "假設：樣本可能其實是一隻貓。", cls: "glow", pause: 60 },
+      { text: "準確度：100% 民間傳說。0% 科學。", cls: "dim", pause: 60 },
       { text: "就緒。", cls: "green cursor", pause: 60 }
     ],
     analyzing: [
       { text: "已收到全部 10 題。分析中…", cls: "glow" },
-      { text: "問題 01：凌晨三點行為........ 令人擔憂", cls: "dim", pause: 140 },
-      { text: "問題 02：陌生人反應.......... 已審判", cls: "dim", pause: 140 },
-      { text: "問題 03：晚餐耐心............ 0.7 秒", cls: "dim", pause: 140 },
-      { text: "問題 04：興趣履歷............ 無法就業", cls: "dim", pause: 140 },
-      { text: "問題 05：愛之語.............. 已接收(?)", cls: "dim", pause: 140 },
-      { text: "問題 06：衝突風格............ 建議請律師", cls: "dim", pause: 140 },
-      { text: "問題 07：星期六模擬.......... 通過", cls: "dim", pause: 140 },
-      { text: "問題 08：缺點目錄............ 儲存空間已滿", cls: "dim", pause: 140 },
-      { text: "問題 09：抱起容忍度.......... 事件已記錄", cls: "dim", pause: 140 },
-      { text: "問題 10：理毛紀錄............ 法院封存", cls: "dim", pause: 200 },
-      { text: "迷地原蟲數量................ 4（全在睡覺）", cls: "dim", pause: 240 },
-      { text: "查詢榮格資料庫.............. 勉強匹配", cls: "dim", pause: 260 },
-      { text: "分類已鎖定。", cls: "green", pause: 350 }
+      { text: "問題 01：凌晨三點行為........ 令人擔憂", cls: "dim", pause: 45 },
+      { text: "問題 02：陌生人反應.......... 已審判", cls: "dim", pause: 45 },
+      { text: "問題 03：晚餐耐心............ 0.7 秒", cls: "dim", pause: 45 },
+      { text: "問題 04：興趣履歷............ 無法就業", cls: "dim", pause: 45 },
+      { text: "問題 05：愛之語.............. 已接收(?)", cls: "dim", pause: 45 },
+      { text: "問題 06：衝突風格............ 建議請律師", cls: "dim", pause: 45 },
+      { text: "問題 07：星期六模擬.......... 通過", cls: "dim", pause: 45 },
+      { text: "問題 08：缺點目錄............ 儲存空間已滿", cls: "dim", pause: 45 },
+      { text: "問題 09：抱起容忍度.......... 事件已記錄", cls: "dim", pause: 45 },
+      { text: "問題 10：理毛紀錄............ 法院封存", cls: "dim", pause: 60 },
+      { text: "迷地原蟲數量................ 4（全在睡覺）", cls: "dim", pause: 70 },
+      { text: "查詢榮格資料庫.............. 勉強匹配", cls: "dim", pause: 80 },
+      { text: "分類已鎖定。", cls: "green", pause: 250 }
     ],
     query: "問題",
     classDone: "分類完成",
@@ -988,6 +989,7 @@ function typeLines(container, lines, speed = 14) {
       let ci = 0;
       const plain = l.text;
       const timer = setInterval(() => {
+        if (!container.isConnected) { clearInterval(timer); resolve(); return; }
         ci++;
         div.textContent = plain.slice(0, ci);
         if (ci >= plain.length) {
@@ -1002,13 +1004,10 @@ function typeLines(container, lines, speed = 14) {
 }
 
 async function renderIntro() {
-  screen.innerHTML = `<div id="boot"></div><div class="cta" id="boot-cta" hidden>
+  screen.innerHTML = `<div id="boot"></div><div class="cta">
     <button class="term-btn glow" id="start">${T.begin}</button></div>`;
-  const boot = document.getElementById("boot");
-  await typeLines(boot, T.boot);
-  const cta = document.getElementById("boot-cta");
-  cta.hidden = false;
   document.getElementById("start").onclick = startQuiz;
+  await typeLines(document.getElementById("boot"), T.boot, 9);
 }
 
 function startQuiz() {
@@ -1064,7 +1063,7 @@ function renderQuestion() {
 
 async function renderAnalyzing() {
   screen.innerHTML = `<div id="analysis"></div>`;
-  await typeLines(document.getElementById("analysis"), T.analyzing, 8);
+  await typeLines(document.getElementById("analysis"), T.analyzing, 4);
   renderResult();
 }
 
