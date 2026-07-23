@@ -316,8 +316,9 @@
   .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
   .btn-row .term-btn {
     width: auto; flex: 1; font-size: 19px; margin-top: 0;
-    text-align: left; text-indent: -1.5em; padding-left: calc(14px + 1.5em);
+    text-align: left; padding-left: calc(14px + 1.5em);
   }
+  .btn-row .ico { display: inline-block; width: 1.5em; margin-left: -1.5em; }
 
   .toast {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
@@ -875,10 +876,10 @@ function renderResult() {
     <p class="desc">${cat.desc}</p>
     <div class="traits dim">${cat.traits.map(t => `<span>${t}</span>`).join("")}</div>
     <div class="btn-row">
-      <button class="term-btn" id="share">⇪ TRANSMIT RESULT</button>
-      <button class="term-btn" id="badge">⎗ GET BADGE</button>
-      <button class="term-btn" id="another">⟳ REFRESH FEED</button>
-      <button class="term-btn" id="retake">◀ RESCAN</button>
+      <button class="term-btn" id="share"><span class="ico">⇪</span>TRANSMIT RESULT</button>
+      <button class="term-btn" id="badge"><span class="ico">⎗</span>GET BADGE</button>
+      <button class="term-btn" id="another"><span class="ico">⟳</span>REFRESH FEED</button>
+      <button class="term-btn" id="retake"><span class="ico">◀</span>RESCAN</button>
     </div>`;
 
   loadPhoto(cat);
