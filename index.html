@@ -596,6 +596,18 @@ const CATS = {
   }
 };
 
+/* facility org chart: every specimen reports to a department */
+const DEPTS = {
+  orange: "CHAOS OPERATIONS", tortie: "CHAOS OPERATIONS", kitten: "CHAOS OPERATIONS", bengal: "CHAOS OPERATIONS",
+  void: "SURVEILLANCE & JUDGMENT", calico: "SURVEILLANCE & JUDGMENT", grump: "SURVEILLANCE & JUDGMENT",
+  grey: "NAPPING SCIENCES", sleeper: "NAPPING SCIENCES", chonk: "NAPPING SCIENCES",
+  tuxedo: "PUBLIC RELATIONS", tabby: "PUBLIC RELATIONS", maine: "PUBLIC RELATIONS",
+  white: "AESTHETICS & LUXURY", persian: "AESTHETICS & LUXURY", floof: "AESTHETICS & LUXURY",
+  siamese: "COMMUNICATIONS", blep: "COMMUNICATIONS",
+  sphynx: "EXPERIMENTAL AFFECTION", ragdoll: "EXPERIMENTAL AFFECTION"
+};
+for (const k in DEPTS) CATS[k].dept = DEPTS[k];
+
 const QUESTIONS = [
   {
     q: "It's 3am. Everyone is asleep. What do you do?",
@@ -1154,17 +1166,20 @@ async function buildBadge(cat) {
 
   ctx.font = "27px VT323, monospace";
   ctx.fillStyle = "#8a4b00";
-  ctx.fillText(`PURRSONALITY MATRIX: ${lastMbti || "????"}`, W / 2, 762);
-  ctx.font = "25px VT323, monospace";
+  ctx.fillText(`PURRSONALITY MATRIX: ${lastMbti || "????"}`, W / 2, 754);
+  ctx.font = "26px VT323, monospace";
+  ctx.fillStyle = "#2b2118";
+  ctx.fillText(`DEPT: ${cat.dept || "UNASSIGNED"}`, W / 2, 792);
+  ctx.font = "23px VT323, monospace";
   ctx.fillStyle = "#6e6450";
-  ctx.fillText("CLEARANCE LEVEL: TREATS & SUNBEAMS", W / 2, 800);
+  ctx.fillText("CLEARANCE LEVEL: TREATS & SUNBEAMS", W / 2, 826);
 
   // barcode
   let bx = 120;
   ctx.fillStyle = "#211d15";
   while (bx < W - 120) {
     const bw = 2 + Math.floor(Math.random() * 5);
-    if (Math.random() > .35) ctx.fillRect(bx, 848, bw, 84);
+    if (Math.random() > .35) ctx.fillRect(bx, 856, bw, 74);
     bx += bw + 3;
   }
   ctx.font = "24px VT323, monospace";
