@@ -274,7 +274,8 @@
 
   /* ================= result ================= */
   .stamp-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-  .result-name { font-size: 34px; letter-spacing: 1px; margin: 2px 0 14px; }
+  .result-name { font-size: 34px; letter-spacing: 1px; margin: 2px 0 4px; }
+  .mbti-note { font-size: 16px; letter-spacing: 1px; margin-bottom: 14px; }
   .stamp {
     font-family: "Michroma", sans-serif; font-size: 10px; letter-spacing: 2px;
     color: var(--alert); border: 2px solid var(--alert); padding: 5px 9px;
@@ -599,91 +600,91 @@ const QUESTIONS = [
   {
     q: "It's 3am. Everyone is asleep. What do you do?",
     a: [
-      { t: "Scream at absolutely nothing", s: ["void", "siamese"] },
-      { t: "Sprint laps around the house at Mach 5", s: ["orange", "bengal"] },
-      { t: "Sleep. Obviously. What is wrong with you", s: ["grey", "sleeper"] },
-      { t: "Attack the nearest sleeping human's feet", s: ["kitten", "tortie"] }
+      { t: "Scream at absolutely nothing", s: ["void", "siamese"], m: "EN" },
+      { t: "Sprint laps around the house at Mach 5", s: ["orange", "bengal"], m: "EP" },
+      { t: "Sleep. Obviously. What is wrong with you", s: ["grey", "sleeper"], m: "IJ" },
+      { t: "Attack the nearest sleeping human's feet", s: ["kitten", "tortie"], m: "TP" }
     ]
   },
   {
     q: "A new person arrives at the house. You:",
     a: [
-      { t: "Greet them at the door and immediately demand attention", s: ["maine", "orange"] },
-      { t: "Vanish. They will never know I exist", s: ["void", "persian"] },
-      { t: "Observe from a high place, silently judging", s: ["calico", "grump"] },
-      { t: "Flop over and go completely limp. Instant friend", s: ["ragdoll", "blep"] }
+      { t: "Greet them at the door and immediately demand attention", s: ["maine", "orange"], m: "EF" },
+      { t: "Vanish. They will never know I exist", s: ["void", "persian"], m: "IN" },
+      { t: "Observe from a high place, silently judging", s: ["calico", "grump"], m: "IT" },
+      { t: "Flop over and go completely limp. Instant friend", s: ["ragdoll", "blep"], m: "EF" }
     ]
   },
   {
     q: "Dinner is 7 minutes late. Your reaction:",
     a: [
-      { t: "A full opera performance of despair", s: ["siamese", "tortie"] },
-      { t: "Knock something off the counter as a warning", s: ["grump", "calico"] },
-      { t: "Sit by the bowl, silently disappointed in everyone", s: ["tabby", "sleeper"] },
-      { t: "I have already eaten. Twice. Elsewhere", s: ["chonk", "tuxedo"] }
+      { t: "A full opera performance of despair", s: ["siamese", "tortie"], m: "EF" },
+      { t: "Knock something off the counter as a warning", s: ["grump", "calico"], m: "TJ" },
+      { t: "Sit by the bowl, silently disappointed in everyone", s: ["tabby", "sleeper"], m: "IJ" },
+      { t: "I have already eaten. Twice. Elsewhere", s: ["chonk", "tuxedo"], m: "TP" }
     ]
   },
   {
     q: "Pick a hobby:",
     a: [
-      { t: "Sitting in boxes two sizes too small", s: ["tabby", "chonk"] },
-      { t: "Fashion. I am the moment", s: ["white", "persian"] },
-      { t: "Long-distance staring contests with the wall", s: ["void", "blep"] },
-      { t: "Climbing things that were never meant to be climbed", s: ["bengal", "kitten"] }
+      { t: "Sitting in boxes two sizes too small", s: ["tabby", "chonk"], m: "SJ" },
+      { t: "Fashion. I am the moment", s: ["white", "persian"], m: "ES" },
+      { t: "Long-distance staring contests with the wall", s: ["void", "blep"], m: "IN" },
+      { t: "Climbing things that were never meant to be climbed", s: ["bengal", "kitten"], m: "SP" }
     ]
   },
   {
     q: "Your love language is:",
     a: [
-      { t: "Physical touch, whether you consent or not", s: ["sphynx", "maine"] },
-      { t: "One slow blink from across the room. That's the love", s: ["grey", "void"] },
-      { t: "Bringing you gifts (condition: unknown)", s: ["tabby", "bengal"] },
-      { t: "Graciously allowing you to admire me", s: ["white", "persian"] }
+      { t: "Physical touch, whether you consent or not", s: ["sphynx", "maine"], m: "EF" },
+      { t: "One slow blink from across the room. That's the love", s: ["grey", "void"], m: "IN" },
+      { t: "Bringing you gifts (condition: unknown)", s: ["tabby", "bengal"], m: "SF" },
+      { t: "Graciously allowing you to admire me", s: ["white", "persian"], m: "IT" }
     ]
   },
   {
     q: "How do you handle conflict?",
     a: [
-      { t: "The paw of correction. Claws optional", s: ["tortie", "grump"] },
-      { t: "Dramatic exit, followed by six hours of sulking", s: ["white", "siamese"] },
-      { t: "Conflict? I was never here. I am vibes only", s: ["orange", "blep"] },
-      { t: "Go completely limp until the problem loses interest", s: ["ragdoll", "sleeper"] }
+      { t: "The paw of correction. Claws optional", s: ["tortie", "grump"], m: "ST" },
+      { t: "Dramatic exit, followed by six hours of sulking", s: ["white", "siamese"], m: "IF" },
+      { t: "Conflict? I was never here. I am vibes only", s: ["orange", "blep"], m: "NP" },
+      { t: "Go completely limp until the problem loses interest", s: ["ragdoll", "sleeper"], m: "IP" }
     ]
   },
   {
     q: "Describe your ideal Saturday:",
     a: [
-      { t: "A sunbeam. Fourteen hours. No interruptions", s: ["grey", "sleeper"] },
-      { t: "Committing crimes at maximum speed", s: ["orange", "kitten"] },
-      { t: "Hosting a one-cat TED talk for the household", s: ["siamese", "sphynx"] },
-      { t: "Supervising everyone from the tallest point in the room", s: ["calico", "tuxedo"] }
+      { t: "A sunbeam. Fourteen hours. No interruptions", s: ["grey", "sleeper"], m: "IS" },
+      { t: "Committing crimes at maximum speed", s: ["orange", "kitten"], m: "EP" },
+      { t: "Hosting a one-cat TED talk for the household", s: ["siamese", "sphynx"], m: "EN" },
+      { t: "Supervising everyone from the tallest point in the room", s: ["calico", "tuxedo"], m: "TJ" }
     ]
   },
   {
     q: "Choose your flaw. Be honest:",
     a: [
-      { t: "\"Flaw\"? Unfamiliar concept. Next question", s: ["white", "persian"] },
-      { t: "Too smart, and I use it for evil", s: ["siamese", "bengal"] },
-      { t: "No thoughts whatsoever, head empty", s: ["orange", "blep"] },
-      { t: "Clingy to a degree that raises legal questions", s: ["sphynx", "ragdoll"] }
+      { t: "\"Flaw\"? Unfamiliar concept. Next question", s: ["white", "persian"], m: "TJ" },
+      { t: "Too smart, and I use it for evil", s: ["siamese", "bengal"], m: "NT" },
+      { t: "No thoughts whatsoever, head empty", s: ["orange", "blep"], m: "SP" },
+      { t: "Clingy to a degree that raises legal questions", s: ["sphynx", "ragdoll"], m: "EF" }
     ]
   },
   {
     q: "Someone picks you up without asking. You:",
     a: [
-      { t: "Go limp. This is my life now", s: ["ragdoll", "chonk"] },
-      { t: "Immediate paw of correction, claws included", s: ["tortie", "grump"] },
-      { t: "Freeze with maximum offense. The audacity", s: ["calico", "white"] },
-      { t: "Wiggle free, then act like nothing happened", s: ["tuxedo", "floof"] }
+      { t: "Go limp. This is my life now", s: ["ragdoll", "chonk"], m: "FP" },
+      { t: "Immediate paw of correction, claws included", s: ["tortie", "grump"], m: "TJ" },
+      { t: "Freeze with maximum offense. The audacity", s: ["calico", "white"], m: "IJ" },
+      { t: "Wiggle free, then act like nothing happened", s: ["tuxedo", "floof"], m: "SP" }
     ]
   },
   {
     q: "Finally — your relationship with hair maintenance:",
     a: [
-      { t: "Constant. I am 90% hair and it must be perfect", s: ["floof", "persian"] },
-      { t: "I am naked and unbothered", s: ["sphynx", "grey"] },
-      { t: "I shed a full second cat weekly. You're welcome", s: ["floof", "maine"] },
-      { t: "Groomed once, in 2019. Still coasting", s: ["tuxedo", "chonk"] }
+      { t: "Constant. I am 90% hair and it must be perfect", s: ["floof", "persian"], m: "SJ" },
+      { t: "I am naked and unbothered", s: ["sphynx", "grey"], m: "TP" },
+      { t: "I shed a full second cat weekly. You're welcome", s: ["floof", "maine"], m: "EN" },
+      { t: "Groomed once, in 2019. Still coasting", s: ["tuxedo", "chonk"], m: "IP" }
     ]
   }
 ];
@@ -692,6 +693,8 @@ const screen = document.getElementById("screen");
 const toast = document.getElementById("toast");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let scores = {};
+let mbtiScores = {};
+let lastMbti = "";
 let current = 0;
 
 function showToast(msg) {
@@ -756,8 +759,20 @@ async function renderIntro() {
 function startQuiz() {
   scores = {};
   for (const key in CATS) scores[key] = 0;
+  mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
   current = 0;
   renderQuestion();
+}
+
+function computeMbti() {
+  return [["E", "I"], ["S", "N"], ["T", "F"], ["J", "P"]].map(([a, b]) => {
+    if (mbtiScores[a] === mbtiScores[b]) return Math.random() < .5 ? a : b;
+    return mbtiScores[a] > mbtiScores[b] ? a : b;
+  }).join("");
+}
+
+function displayName(cat) {
+  return lastMbti ? cat.name.replace(/^THE /, `THE ${lastMbti} `) : cat.name;
 }
 
 function blocks() {
@@ -783,7 +798,9 @@ function renderQuestion() {
     </div>`;
   screen.querySelectorAll(".answers button").forEach(btn => {
     btn.onclick = () => {
-      QUESTIONS[current].a[btn.dataset.i].s.forEach(key => scores[key]++);
+      const answer = QUESTIONS[current].a[btn.dataset.i];
+      answer.s.forEach(key => scores[key]++);
+      (answer.m || "").split("").forEach(l => mbtiScores[l]++);
       current++;
       current < QUESTIONS.length ? renderQuestion() : renderAnalyzing();
     };
@@ -798,6 +815,7 @@ async function renderAnalyzing() {
     { text: "MEASURING CHAOS COEFFICIENT....... ▓▓▓▓▓▓", cls: "dim", pause: 260 },
     { text: "COUNTING BRAIN CELLS.............. 1(?)", cls: "dim", pause: 260 },
     { text: "CROSS-REFERENCING FOLKLORE DB..... DONE", cls: "dim", pause: 300 },
+    { text: "CONSULTING JUNG DATABASE.......... RELUCTANT MATCH", cls: "dim", pause: 300 },
     { text: "CLASSIFICATION LOCKED.", cls: "green", pause: 350 }
   ], 10);
   renderResult();
@@ -815,12 +833,14 @@ function renderResult() {
   const key = pickWinner();
   const cat = CATS[key];
   lastCat = cat;
+  lastMbti = computeMbti();
   screen.innerHTML = `
     <div class="stamp-row">
       <span class="line dim">CLASSIFICATION COMPLETE</span>
       <span class="stamp">CONFIRMED FELINE</span>
     </div>
-    <div class="result-name glow">${cat.name} ${cat.emoji}</div>
+    <div class="result-name glow">${displayName(cat)} ${cat.emoji}</div>
+    <div class="mbti-note dim">PERSONALITY MATRIX: ${lastMbti} · CONFIDENCE LEVEL: VIBES</div>
     <div class="feed">
       <div class="feed-label dim"><span>LIVE SPECIMEN FEED · CH-0${Math.floor(Math.random() * 9) + 1}</span><span class="rec">● REC</span></div>
       <div class="feed-frame" id="frame">
@@ -866,13 +886,13 @@ function loadPhoto(cat) {
 }
 
 function shortShareText(cat) {
-  return `CAT-SCAN 3000 diagnosis: I am ${cat.name} ${cat.emoji} — "${cat.tagline}" Get scanned: ${QUIZ_URL}`;
+  return `CAT-SCAN 3000 diagnosis: I am ${displayName(cat)} ${cat.emoji} — "${cat.tagline}" Get scanned: ${QUIZ_URL}`;
 }
 
 function fullShareText(cat) {
   return [
     "CAT-SCAN 3000 // CLASSIFICATION COMPLETE",
-    `I am ${cat.name} ${cat.emoji}`,
+    `I am ${displayName(cat)} ${cat.emoji}`,
     `"${cat.tagline}"`,
     "",
     cat.desc,
@@ -941,11 +961,17 @@ async function buildShareCard(cat) {
 
   // cat name, left-aligned with glow
   ctx.textAlign = "left";
-  ctx.font = "92px VT323, monospace";
+  const nameText = `${displayName(cat)} ${cat.emoji}`;
+  let nameSize = 92;
+  ctx.font = `${nameSize}px VT323, monospace`;
+  while (ctx.measureText(nameText).width > W - P * 2 && nameSize > 56) {
+    nameSize -= 4;
+    ctx.font = `${nameSize}px VT323, monospace`;
+  }
   ctx.fillStyle = "#ffb000";
   ctx.shadowColor = "rgba(255,176,0,.8)";
   ctx.shadowBlur = 26;
-  ctx.fillText(`${cat.name} ${cat.emoji}`, P, 300);
+  ctx.fillText(nameText, P, 300);
   ctx.shadowBlur = 0;
 
   // specimen feed frame (4:3 like the screen)
