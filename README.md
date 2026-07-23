@@ -1,4 +1,4 @@
-# CAT-SCAN 3000 — Which Cat Are You? 🐱
+# C-3PAW — Which Cat Are You? 🐱
 
 A retro-futuristic personality quiz that diagnoses which cat you are, based on
 100% real internet cat folklore and 0% actual science.
