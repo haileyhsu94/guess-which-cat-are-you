@@ -1173,7 +1173,7 @@ bindSwitch(swLaser, () => {
     const dot = crt.querySelector(".laser-dot");
     const score = crt.querySelector(".laser-score");
     const dart = fast => {
-      dot.style.transitionDuration = fast ? ".13s" : (0.25 + Math.random() * 0.5) + "s";
+      dot.style.transitionDuration = fast ? ".18s" : (0.7 + Math.random() * 0.6) + "s";
       dot.style.left = (8 + Math.random() * 84) + "%";
       dot.style.top = (8 + Math.random() * 84) + "%";
     };
@@ -1195,7 +1195,7 @@ bindSwitch(swLaser, () => {
       else if (laserHits === 25) showToast("25 HITS. THE DOT REMAINS UNDEFEATED. SOMEHOW.");
     });
     dart();
-    laserTimer = setInterval(dart, 700);
+    laserTimer = setInterval(dart, 1400);
     showToast("LASER DEPLOYED. FOCUS IS NO LONGER POSSIBLE.");
   } else {
     clearInterval(laserTimer);
