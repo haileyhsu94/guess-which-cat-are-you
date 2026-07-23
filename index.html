@@ -248,12 +248,19 @@
     text-shadow: 0 0 6px rgba(255,176,0,.5);
     transition: background .08s, color .08s;
   }
-  .term-btn:hover, .term-btn:focus-visible {
+  @media (hover: hover) {
+    .term-btn:hover {
+      background: var(--amber); color: var(--screen); text-shadow: none;
+      box-shadow: 0 0 18px rgba(255,176,0,.55);
+    }
+    .term-btn:hover .key { color: var(--screen); text-shadow: none; }
+  }
+  .term-btn:focus-visible, .term-btn:active {
     background: var(--amber); color: var(--screen); text-shadow: none;
     outline: none; box-shadow: 0 0 18px rgba(255,176,0,.55);
   }
   .term-btn .key { color: var(--green); margin-right: 10px; }
-  .term-btn:hover .key, .term-btn:focus-visible .key { color: var(--screen); text-shadow: none; }
+  .term-btn:focus-visible .key, .term-btn:active .key { color: var(--screen); text-shadow: none; }
 
   .cta { text-align: center; margin-top: 26px; }
   .cta .term-btn { display: inline-block; width: auto; text-align: center; font-size: 24px; padding: 12px 34px; border-width: 2px; }
