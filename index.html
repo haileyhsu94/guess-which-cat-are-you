@@ -314,7 +314,10 @@
   .traits span { border: 1px solid var(--amber-dim); padding: 2px 8px; white-space: nowrap; }
 
   .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
-  .btn-row .term-btn { width: auto; flex: 1; text-align: center; font-size: 19px; margin-top: 0; }
+  .btn-row .term-btn {
+    width: auto; flex: 1; font-size: 19px; margin-top: 0;
+    text-align: left; text-indent: -1.5em; padding-left: calc(14px + 1.5em);
+  }
 
   .toast {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
@@ -873,7 +876,7 @@ function renderResult() {
     <div class="traits dim">${cat.traits.map(t => `<span>${t}</span>`).join("")}</div>
     <div class="btn-row">
       <button class="term-btn" id="share">⇪ TRANSMIT RESULT</button>
-      <button class="term-btn" id="badge">⎗ PRINT BADGE</button>
+      <button class="term-btn" id="badge">⎗ GET BADGE</button>
       <button class="term-btn" id="another">⟳ REFRESH FEED</button>
       <button class="term-btn" id="retake">◀ RESCAN</button>
     </div>`;
